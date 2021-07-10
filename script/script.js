@@ -2,60 +2,21 @@
 
 //const prompt = require('prompt-sync')({sigint: true});
 
-//Apple bananaanana cherry diamondiamondiamond
-
 // D R Y
 
-const apple = 'apple'
-const banana = 'banana'
-const cherry = 'cherry'
-const diamond = 'diamond'
-
-const reel1 = [
-  apple,
-  banana,
-  cherry,
-  apple,
-  diamond,
-  banana,
-  cherry,
-  apple,
-  diamond,
-  banana
-]
-const reel2 = [
-  banana,
-  apple,
-  cherry,
-  diamond,
-  apple,
-  banana,
-  diamond,
-  cherry,
-  banana,
-  apple
-]
-const reel3 = [
-  apple,
-  diamond,
-  banana,
-  cherry,
-  banana,
-  apple,
-  diamond,
-  cherry,
-  cherry,
-  banana
-]
-
-// let reel=4
-// let fruit=['Apple', 'bananaabananaana', 'cherry', 'diamondiamondiamond', 'Mango']
-// let fruitcount=12
-// let p= Math.floor(Math.randiamondom()*12)
 let v = 0
 let money = 10
 let costPerSpin = 1
 
+
+let reel1 =[]
+let reel2 =[]
+let reel3 =[]
+reel1 = Array.from(document.getElementById("reel1").innerHTML)
+console.log(reel1)
+
+let reelHeight = document.getElementById("reel1").scrollHeight
+console.log(reelHeight)
 //while(money>costPerSpin)
 function spinReels () {
   console.log('You have £' + money)
@@ -69,33 +30,22 @@ function spinReels () {
 
   console.log(reel1[p1] + ' ' + reel2[p2] + ' ' + reel3[p3])
 
-  let num = prompt('Please type 1, 2 or 3 to hold the Reel :')
-  //console.log(typeof num)
-  num = Number(num)
-  if (num != 1) {
-    p1 = Math.floor(Math.random() * 10)
-  } else if (num != 2) {
-    p2 = Math.floor(Math.random() * 10)
-  } else if (num != 3) {
-    p3 = Math.floor(Math.random() * 10)
-  } else console.log('You input invalid number')
-  console.log(reel1[p1] + ' ' + reel2[p2] + ' ' + reel3[p3])
 
   if (checkReelsMatch(reel1[p1], reel2[p2], reel3[p3])) {
     console.log('You win :o)')
-    if (reel1[p1] == 'Apple') {
+    if (reel1[p1] == '🍏') {
       money = money + 2 * 10
       console.log('£20')
-    } else if (reel1[p1] == 'banana') {
+    } else if (reel1[p1] == '🍌') {
       money = money + 3 * 10
       console.log('£30')
-    } else if (reel1[p1] == 'cherry') {
+    } else if (reel1[p1] == '🍒') {
       money = money + 5 * 10
       console.log('£50')
-    } else if (reel1[p1] == 'diamond') {
+    } else if (reel1[p1] == '🍇') {
       money = money + 20 * 10
       console.log('£200')
-    } else if (reel1[p1] == 'Mango') {
+    } else if (reel1[p1] == '🥭') {
       money = money + 30 * 10
       console.log('£300')
     }
@@ -131,17 +81,21 @@ function htmlDimention () {
 }*/
 function spin(){
   let reels = document.getElementsByClassName('reel')
-
+  
   //reels.forEach(reel => {
   //   reel.scrollTop = v
   //});
   for (let index = 0; index < reels.length; index++) {
     const reel = reels[index]
-    let interval = setInterval(function () {
-      v = v + 1
-      reel.scrollTop = v
-    }, 1000 / 25)
-    setTimeout(function(){ clearInterval(interval)}, 2000)
+    //let interval = setInterval(function () {
+      //v = v + 1
+      reel.scrollTop += 1
+      if (reel.scrollTop >= reelHeight){
+        reel.scrollTop =0
+      }
+   // }, 1000 / 25)
+   // setTimeout(function(){ clearInterval(interval)}, 9000)
+   requestAnimationFrame(spin)
   }
 
   //p1= Math.floor(Math.random()*10)
@@ -149,4 +103,11 @@ function spin(){
 
   //setInterval(spinning, 100);
   //setTimeout(slotTimeout1, 2000);
+}
+function hold(){
+  let holdReel = document.getElementsByClassName('reel_button')
+
+  
+  //this.singleFruitHeight = this.reels[0].div.scrollHeight / (reelLength *2) //The height of just one fruit symbol
+
 }

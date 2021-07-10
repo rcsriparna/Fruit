@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="./css/style.css" type="text/css" />
-    <script src="./script/script.js"></script>
+    <script src="./script/script.js" defer></script>
 
     <title>4 Boxes</title>
   </head>
@@ -14,15 +14,10 @@
         <h1>Please press the play button!</h1>
       </div>
       <div class="item-main">
-        <div class="reel">
-          🍒🍓🫐🥝🍅🫒🥥🥑🍇🍈 🍉 🍊🍋🍌🍍🥭 🍎 🍏🍐 🍑
-        </div>
-        <div class="reel">
-          🍒🍓🫐🥝🍅🫒🥥🥑🍇🍈 🍉 🍊🍋🍌🍍🥭 🍎 🍏🍐 🍑
-        </div>
-        <div class="reel">
-          🍒🍓🫐🥝🍅🫒🥥🥑🍇🍈 🍉 🍊🍋🍌🍍🥭 🍎 🍏🍐 🍑
-        </div>
+        <div class="reel" id="reel1">🍒🍓🫐🥝🥭🍎🍏🍐🍅🍌🍅🫒🥥🥑🍇🍈🍉🍌🍊🍋🥭🍎🍏🍐🍅🍌🍍🥭🍎🍏🍐🍑</div>
+        <div class="reel" id="reel2">🍒🍓🫐🥝🍌🍅🫒🥭🍎🍏🍌🍐🍅🥥🥑🍇🍈🍉 🍊🍋🍌🍍🥭🍎🍏🍐🍑🥥🥑🍇🍈🍉</div>
+        <div class="reel" id="reel3">🍒🥭🍎🍏🍐🍌🍅🍓🫐🥝🍅🫒🥥🥑🍇🍈🍉 🍊🍋🍌🍍🥭🍎🍏🍐🍅🫒🥥🥑🍇🍈🍉</div>
+        
         <button class="play" onclick="spin()">Play</button>
       </div>
       <div class="item-button">
