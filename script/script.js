@@ -8,16 +8,25 @@ let v = 0
 let money = 10
 let costPerSpin = 1
 
+let reels=[]  //reels is an array of reel objects (each has a position, a set of fruits, and a reference to its DIV)
 
-let reel1 =[]
-let reel2 =[]
-let reel3 =[]
-reel1 = Array.from(document.getElementById("reel1").innerHTML)
-console.log(reel1)
+let reelDivs = document.getElementsByClassName('reel') //Get all the (3) Divs from the HTML
 
-let reelHeight = document.getElementById("reel1").scrollHeight
-console.log(reelHeight)
-//while(money>costPerSpin)
+let reelHeight = reelDivs[0].scrollHeight
+
+for (let i = 0; i < reelDivs.length; i++) {
+  reels[i]={} //initialise a new object for to hold everything about this reel
+  reels[i].position = 0 //set the position to 0  
+  reels[i].fruits = Array.from(reelDivs[i].innerHTML) //Split the string of fruits into an array  
+  reels[i].div=reelDivs[i] //hold a reference in each reel object to the DIV
+  reels[i].div.innerHTML+=reels[i].div.innerHTML  //Double up the fruits on the reels to allow us to wrap at the very end (and still see fruits in the window)
+  
+}
+
+let fruitHeight = reelHeight/reels[0].fruits.length  //work out the height (in pixels) of 1 fruit
+
+
+
 function spinReels () {
   console.log('You have £' + money)
   prompt('Press enter to spin the wheels')
@@ -30,6 +39,7 @@ function spinReels () {
 
   console.log(reel1[p1] + ' ' + reel2[p2] + ' ' + reel3[p3])
 
+  spin()
 
   if (checkReelsMatch(reel1[p1], reel2[p2], reel3[p3])) {
     console.log('You win :o)')
@@ -53,61 +63,32 @@ function spinReels () {
   //money -=10
 }
 
-//console.log('You are out of money')
-/*
-function checkReelsMatch(p1,p2,p3) {
-    if (check3thesame(p1,p2,p3)){
-        return true
-    }
-    else {
-        return false
-    }
-}*/
+
 function checkReelsMatch (a, b, c) {
   if (a == b && b == c) {
     return true
   }
 }
-/*
-function htmlDimention () {
-  let element = document.getElementsByClassName('reel')
-  element[0].offsetHeight
-  console.log(
-    element[0].offsetHeight,
-    element[0].scrollHeight,
-    element[0].getBoundingClientRect()
-  )
-  //console.log("spinning");
-}*/
+
+
 function spin(){
-  let reels = document.getElementsByClassName('reel')
-  
-  //reels.forEach(reel => {
-  //   reel.scrollTop = v
-  //});
-  for (let index = 0; index < reels.length; index++) {
-    const reel = reels[index]
-    //let interval = setInterval(function () {
-      //v = v + 1
-      reel.scrollTop += 1
-      if (reel.scrollTop >= reelHeight){
-        reel.scrollTop =0
-      }
-   // }, 1000 / 25)
-   // setTimeout(function(){ clearInterval(interval)}, 9000)
-   requestAnimationFrame(spin)
+
+  for (let i = 0; i < reels.length; i++) {
+    
+    let r=reels[i]
+    r.div.scrollTop = r.position * fruitHeight  //calculate the offset in fruit heights
+    r.position +=0.1 //this is in 'fruits'
+    
+    if (r.position>r.fruits.length){r.position=0}  //wrap around when we reach the end of the reel
+    
   }
 
-  //p1= Math.floor(Math.random()*10)
-  //spin[p1].
+  requestAnimationFrame(spin)
 
-  //setInterval(spinning, 100);
-  //setTimeout(slotTimeout1, 2000);
+
 }
 function hold(){
   let holdReel = document.getElementsByClassName('reel_button')
 
-  
-  //this.singleFruitHeight = this.reels[0].div.scrollHeight / (reelLength *2) //The height of just one fruit symbol
 
 }
